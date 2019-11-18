@@ -148,7 +148,7 @@ A=M
 M=D
 @SP
 M=M+1
-@/home/shelby/Desktop/code/CS Storage/Virtual Machine/Virtual-Machine-Translator/TestFiles/StaticTest.vm8
+@StaticTest.vm8
 D=A
 @R13
 M=D
@@ -158,7 +158,7 @@ D=M
 @R13
 A=M
 M=D
-@/home/shelby/Desktop/code/CS Storage/Virtual Machine/Virtual-Machine-Translator/TestFiles/StaticTest.vm3
+@StaticTest.vm3
 D=A
 @R13
 M=D
@@ -168,7 +168,7 @@ D=M
 @R13
 A=M
 M=D
-@/home/shelby/Desktop/code/CS Storage/Virtual Machine/Virtual-Machine-Translator/TestFiles/StaticTest.vm1
+@StaticTest.vm1
 D=A
 @R13
 M=D
@@ -178,14 +178,14 @@ D=M
 @R13
 A=M
 M=D
-@/home/shelby/Desktop/code/CS Storage/Virtual Machine/Virtual-Machine-Translator/TestFiles/StaticTest.vm3
+@StaticTest.vm3
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-@/home/shelby/Desktop/code/CS Storage/Virtual Machine/Virtual-Machine-Translator/TestFiles/StaticTest.vm1
+@StaticTest.vm1
 D=M
 @SP
 A=M
@@ -197,7 +197,7 @@ AM=M-1
 D=M
 A=A-1
 M=M-D
-@/home/shelby/Desktop/code/CS Storage/Virtual Machine/Virtual-Machine-Translator/TestFiles/StaticTest.vm8
+@StaticTest.vm8
 D=M
 @SP
 A=M
@@ -758,7 +758,7 @@ A=M
 M=D
 @SP
 M=M+1
-@/home/shelby/Desktop/code/CS Storage/Virtual Machine/Virtual-Machine-Translator/TestFiles/Class2.vm0
+@Class2.vm0
 D=A
 @R13
 M=D
@@ -778,7 +778,7 @@ A=M
 M=D
 @SP
 M=M+1
-@/home/shelby/Desktop/code/CS Storage/Virtual Machine/Virtual-Machine-Translator/TestFiles/Class2.vm1
+@Class2.vm1
 D=A
 @R13
 M=D
@@ -852,14 +852,14 @@ M=D
 A=M
 0;JMP
 (Class2.get)
-@/home/shelby/Desktop/code/CS Storage/Virtual Machine/Virtual-Machine-Translator/TestFiles/Class2.vm0
+@Class2.vm0
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-@/home/shelby/Desktop/code/CS Storage/Virtual Machine/Virtual-Machine-Translator/TestFiles/Class2.vm1
+@Class2.vm1
 D=M
 @SP
 A=M
@@ -938,7 +938,7 @@ A=M
 M=D
 @SP
 M=M+1
-@/home/shelby/Desktop/code/CS Storage/Virtual Machine/Virtual-Machine-Translator/TestFiles/Class1.vm0
+@Class1.vm0
 D=A
 @R13
 M=D
@@ -958,7 +958,7 @@ A=M
 M=D
 @SP
 M=M+1
-@/home/shelby/Desktop/code/CS Storage/Virtual Machine/Virtual-Machine-Translator/TestFiles/Class1.vm1
+@Class1.vm1
 D=A
 @R13
 M=D
@@ -1032,14 +1032,14 @@ M=D
 A=M
 0;JMP
 (Class1.get)
-@/home/shelby/Desktop/code/CS Storage/Virtual Machine/Virtual-Machine-Translator/TestFiles/Class1.vm0
+@Class1.vm0
 D=M
 @SP
 A=M
 M=D
 @SP
 M=M+1
-@/home/shelby/Desktop/code/CS Storage/Virtual Machine/Virtual-Machine-Translator/TestFiles/Class1.vm1
+@Class1.vm1
 D=M
 @SP
 A=M

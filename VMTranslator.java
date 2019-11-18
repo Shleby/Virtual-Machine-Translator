@@ -76,9 +76,9 @@ public class VMTranslator {
         ArrayList<String> vmInstructions = cleanFile(fileName);
         // Array list containing asm instructions
         ArrayList<String> asmInstructions = new ArrayList<String>();
+        File vmFileName = new File(fileName);
         for (String vmInstruct : vmInstructions) {
             String[] pieces = vmInstruct.split(" ");
-            String instructOne = pieces[0];
             String instructThree = null, instructTwo = null;
             if (pieces.length > 1) {
                 instructTwo = pieces[1];
@@ -153,7 +153,7 @@ public class VMTranslator {
                 asmInstructions.add("M=!M");
             } else if (vmInstruct.contains("push")) {
                 if (vmInstruct.contains("static")) {
-                    asmInstructions.add("@" + fileName + instructThree);
+                    asmInstructions.add("@" + vmFileName.getName() + instructThree);
                     asmInstructions.add("D=M");
                     asmInstructions.add("@SP");
                     asmInstructions.add("A=M");
@@ -244,7 +244,7 @@ public class VMTranslator {
                 }
             } else if (vmInstruct.contains("pop")) {
                 if (vmInstruct.contains("static")) {
-                    asmInstructions.add("@" + fileName + instructThree);
+                    asmInstructions.add("@" + vmFileName.getName() + instructThree);
                     asmInstructions.add("D=A");
                     asmInstructions.add("@R13");
                     asmInstructions.add("M=D");
