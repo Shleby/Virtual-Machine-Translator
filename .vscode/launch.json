@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - VMTranslator",
+            "request": "launch",
+            "mainClass": "VMTranslator",
+            "projectName": "Virtual-Machine-Translator_eaf95c6f"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - main",
+            "request": "launch",
+            "mainClass": "main",
+            "projectName": "Virtual-Machine-Translator_eaf95c6f"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - VirtualMachine",
+            "request": "launch",
+            "mainClass": "VirtualMachine",
+            "projectName": "Virtual-Machine-Translator_eaf95c6f"
+        }
+    ]
+}
