@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -7,6 +8,8 @@ public class VMTranslator {
 
     private static int directoryCount;
     private static int fileCount;
+    public static int vmCounter;
+    public static int invalidFileCounter;
     /*
      * This method utilizes recursion to find all the files in specified
      * directories, as well as its sub directories.
@@ -15,14 +18,14 @@ public class VMTranslator {
         ++directoryCount;
         if (dir.isDirectory()) {
             File[] lookForDir = dir.listFiles();
-            for (int i = 0; i < lookForDir.length; i -= -1) {
-                if (lookForDir[i].isDirectory()) {
-                    System.out.println("Subdirectory found: " + lookForDir[i]);
-                    subDirectories.add(lookForDir[i]);
+            for (File file : lookForDir) {
+                if (file.isDirectory()) {
+                    System.out.println("Subdirectory found: " + file.getName());
+                    subDirectories.add(file);
                 }
                 else {
-                    System.out.println("File found: " + lookForDir[i]);
-                    result.add(lookForDir[i].toString());
+                    System.out.println("File found: " + file.getName());
+                    result.add(file.toString());
                     ++fileCount;
                 }
             }
@@ -33,6 +36,42 @@ public class VMTranslator {
             fetchFiles(dir, result, subDirectories);
         }
         return result;
+    }
+    public static ArrayList<String> readFile(String fileName) {
+        ArrayList<String> asmInstructions = new ArrayList<String>();
+
+
+        return asmInstructions;
+    }
+
+    public static String createNewFile(String file) {
+        if (file.contains(".vm")) {
+            file = file.replace(".vm", ".asm");
+            try {
+                File asmFile = new File(file);
+                if (asmFile.createNewFile())
+                    System.out.println("Asm file was created successfully!");
+                else
+                    System.out.println("Error, file already exists. Instructions have been RE-WRITTEN in the file!");
+            }
+            catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+        }
+        else {
+            file = file.concat(".asm");
+            try {
+                File asmFile = new File(file);
+                if (asmFile.createNewFile())
+                    System.out.println("Asm file was created successfully!");
+                else
+                    System.out.println("Error, file already exists. Instructions have been RE-WRITTEN in the file!");
+            }
+            catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+        }
+        return file;
     }
     public static void main(String[] args) throws IOException {
         // Prompt user to supply either a directory or file
@@ -45,8 +84,23 @@ public class VMTranslator {
         // See if we have a file or a directory
         if (userInput.isFile()) {
             // If it is a file, we still need to check if its a .vm file
+            // Then we proceed to write an asm file filled with translated
+            // instructions
             if (awaitingInput.contains(".vm")) {
                 System.out.println("Identified vm file...");
+
+                // Create asm and a writer to put instructions into it
+                String asmFile = createNewFile(awaitingInput);
+                FileWriter writer = new FileWriter(asmFile);
+
+                ArrayList<String> asmInstructions = readFile(awaitingInput);
+                for (String instruct : asmInstructions) {
+                    writer.write(instruct);
+                }
+                System.out.println("Operations Completed");
+                File asm = new File(asmFile);
+                System.out.println("Vm file: " + userInput.getName() + " ==> Asm File: " + asm.getName() + " | Created/Updated Successfully");
+                writer.close();
             }
             // If not a .vm file throw an exception
             else {
@@ -65,23 +119,39 @@ public class VMTranslator {
             ArrayList<String> files = new ArrayList<String>();
             ArrayList<File> tempFiles = new ArrayList<File>();
             files = fetchFiles(userInput, files, tempFiles);
-
+ 
             System.out.println("Iterated through a total of " + directoryCount + " directories");
             System.out.println("Found a total of " + fileCount + " files");
 
-            int vmCounter = 0, invalidFileCounter = 0;
-
-            // Check if files are vm files or not
-            for (int i = 0; i < files.size(); i -= -1) {
-                if (files.get(i).contains(".vm")) {
+            // Check if files are vm files or not and removes invalid files
+            ArrayList<String> vmFiles = new ArrayList<String>();
+            for (String iterFiles : files) {
+                if (iterFiles.contains(".vm")) {
                     vmCounter++;
+                    vmFiles.add(iterFiles);
                 }
                 else {
                     invalidFileCounter++;
                 }
             }
-            System.out.println(vmCounter + " Vm files confirmed");
-            System.out.println(invalidFileCounter + " Unnacceptable files");
+
+            System.out.println(vmCounter + " .vm files confirmed");
+            System.out.println(invalidFileCounter + " invalid files");
+
+            // Create asm file and a writer to put instructions into it
+            String asmFile = createNewFile(awaitingInput);
+            FileWriter writer = new FileWriter(asmFile);
+            for (String vmFile : vmFiles) {
+                ArrayList<String> asmInstructionsHolder = readFile(vmFile);
+                for (String instruct : asmInstructionsHolder) {
+                    writer.write(instruct);
+                    writer.write(System.getProperty("line.separator"));
+                }
+            }
+            System.out.println("Operations Completed");
+            File asm = new File(asmFile);
+            System.out.println("Directory: " + userInput.getName() + " ==> Asm File: " + asm.getName() + " | Created/Updated Successfully");
+            writer.close();
         }
         else {
             input.close();
