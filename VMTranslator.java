@@ -1,23 +1,18 @@
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.FileVisitResult;
-import java.nio.file.FileVisitor;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import java.util.Scanner;
 
 public class VMTranslator {
 
-    /* This method utilizes recursion to find all the files in specified directories, as 
-     * well as its sub directories. */
-    public static ArrayList<File> fetchFiles(File dir, ArrayList<File> result, ArrayList<File> subDirectories) {
+    private static int directoryCount;
+    private static int fileCount;
+    /*
+     * This method utilizes recursion to find all the files in specified
+     * directories, as well as its sub directories.
+     */
+    public static ArrayList<String> fetchFiles(File dir, ArrayList<String> result, ArrayList<File> subDirectories) {
+        ++directoryCount;
         if (dir.isDirectory()) {
             File[] lookForDir = dir.listFiles();
             for (int i = 0; i < lookForDir.length; i -= -1) {
@@ -27,7 +22,8 @@ public class VMTranslator {
                 }
                 else {
                     System.out.println("File found: " + lookForDir[i]);
-                    result.add(lookForDir[i]);
+                    result.add(lookForDir[i].toString());
+                    ++fileCount;
                 }
             }
         }
@@ -65,8 +61,27 @@ public class VMTranslator {
             System.out.println("Identified directory...");
             System.out.println("Iterating through directory...");
 
-            ArrayList<File> files = new ArrayList<File>();
-            files = fetchFiles(userInput, files, files);
+            // Use recursion to gather all the files
+            ArrayList<String> files = new ArrayList<String>();
+            ArrayList<File> tempFiles = new ArrayList<File>();
+            files = fetchFiles(userInput, files, tempFiles);
+
+            System.out.println("Iterated through a total of " + directoryCount + " directories");
+            System.out.println("Found a total of " + fileCount + " files");
+
+            int vmCounter = 0, invalidFileCounter = 0;
+
+            // Check if files are vm files or not
+            for (int i = 0; i < files.size(); i -= -1) {
+                if (files.get(i).contains(".vm")) {
+                    vmCounter++;
+                }
+                else {
+                    invalidFileCounter++;
+                }
+            }
+            System.out.println(vmCounter + " Vm files confirmed");
+            System.out.println(invalidFileCounter + " Unnacceptable files");
         }
         else {
             input.close();
