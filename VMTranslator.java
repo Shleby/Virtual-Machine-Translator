@@ -86,8 +86,6 @@ public class VMTranslator {
             if (pieces.length > 2) {
                 instructThree = pieces[2];
             }
-
-
             if (vmInstruct.contains("add")) {
                 asmInstructions.add("@SP");
                 asmInstructions.add("AM=M-1");
